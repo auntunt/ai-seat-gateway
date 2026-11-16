@@ -173,7 +173,7 @@ func Install(ctx context.Context, st *store.Store) error {
   source_batch_ids BIGINT[] NOT NULL,input_snapshot JSONB NOT NULL,raw_output TEXT NOT NULL DEFAULT '',
   model TEXT NOT NULL DEFAULT '',input_tokens BIGINT,output_tokens BIGINT,error TEXT NOT NULL DEFAULT '',
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),finished_at TIMESTAMPTZ
- );`+assetSchema+managementSchema+curationSchema+curationScheduleSchema+costSettingsSchema)
+ );`+assetSchema+managementSchema+curationSchema+curationScheduleSchema+costSettingsSchema+observabilitySchema)
 	return err
 }
 
@@ -207,6 +207,11 @@ func (s *Service) Handler() http.Handler {
 		r.Get("/api/model-prices", s.modelPrices)
 		r.Post("/api/model-prices", s.saveModelPrice)
 		r.Get("/api/workspace", s.workspaceStats)
+		r.Get("/api/historical-usage", s.historicalUsage)
+		r.Get("/api/fusion-usage", s.fusionUsage)
+		r.Get("/api/storage-status", s.storageStatus)
+		r.Get("/api/usage-diagnostics", s.usageDiagnostics)
+		r.Post("/api/usage-diagnostics/actions", s.saveUsageAction)
 		r.Get("/api/usage-analysis", s.usageAnalysis)
 		r.Get("/api/usage-analysis/evidence", s.usageEvidence)
 		r.Get("/api/risk-analysis", s.riskAnalysis)

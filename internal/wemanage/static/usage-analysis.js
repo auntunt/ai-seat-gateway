@@ -1,4 +1,4 @@
-import {sidebar} from './navigation.js?v=20261112-diagnostics1';
+import {sidebar} from './navigation.js?v=20261116-observability1';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=v=>Number(v||0).toLocaleString('zh-CN');
 const pct=(v,total)=>total?`${(100*v/total).toFixed(1)}%`:'—';
